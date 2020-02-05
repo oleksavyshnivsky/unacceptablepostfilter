@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<link rel="stylesheet" type="text/css" href="common.css">
+
+		<style>
+			body {
+				width: 400px;
+				/*height: 430px;*/
+				text-align: center;
+				padding: 0.5rem;
+			}
+			#page-refresh-wrapper {
+				display: none;
+				padding: 1rem;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>Виправлення результатів пошуку</h1>
+
+		<hr>
+		<label class="switch">
+			<input type="checkbox" id="status-switch" >
+			<span class="slider round"></span>
+		</label>
+
+		<div id="page-refresh-wrapper">
+			<button class="btn" id="page-refresh">Оновити</button>
+		</div>
+		<hr>
+	
+		<!-- Додати новий сайт у список заблокованих -->
+		<div class="msgbox"></div>
+		<form method="post" id="form-newblockedwebsite">
+			<label for="newblockedwebsite" class="col-form-label">Додати сайт у список заблокованих</label>
+			<input type="text" id="newblockedwebsite" value="" placeholder="URL" class="form-control" required="">
+			<input type="submit" value="Додати" class="btn ">
+		</form>
+
+		<!-- Додати правило виправлення посилань -->
+		<div class="msgbox"></div>
+		<form method="post" id="form-newrule">
+			<label for="newruleB" class="col-form-label">Додати правило виправлення посилання</label>
+			<input type="text" id="newruleB" value="" placeholder="Є" class="form-control" required="">
+			<input type="text" id="newruleA" value="" placeholder="Має бути" class="form-control" required="">
+			<input type="submit" value="Додати" class="btn ">
+		</form>
+
+		<p>
+			Список сайтів і правил — на <a href="/options.html" target="_blank">сторінці налаштувань</a>
+		</p>
+
+		<p>
+			<a href="https://github.com/oleksavyshnivsky/UASearchResultsCorrector" target="_blank">Github</a>
+		</p>
+
+		<p>
+			<a href="mailto:dying.escape+UASearchResultsCorrector@gmail.com" target="_blank">Написати автору</a>
+		</p>
+
+		<script src="common.js" charset="utf-8"></script>
+		<script src="popup.js" charset="utf-8"></script>
+	</body>
+</html>

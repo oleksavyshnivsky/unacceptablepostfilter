@@ -1,0 +1,13 @@
+body {
+	/*background-color: black !important;*/
+	/*color: white;*/
+}
+
+.ode-blocked {
+	color: silver;
+}
+
+.ode-blocked:hover {
+	color: black;
+	transition: color 1s;
+}
