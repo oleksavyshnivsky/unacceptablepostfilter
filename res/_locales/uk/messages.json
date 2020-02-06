@@ -1,0 +1,39 @@
+{
+	"name": {
+		"message": "Message text, with optional placeholders.",
+		"description": "Translator-aimed description of the message.",
+		"placeholders": {
+			"placeholder_name": {
+				"content": "A string to be placed within the message.",
+				"example": "Translator-aimed example of the placeholder string."
+			}
+		}
+	},
+	"title": {
+		"message": "Мовний фільтр"
+	},
+	"blocked": {
+		"message": "Усунено"
+	},
+	"blockagain": {
+		"message": "Знову заблокувати"
+	},
+	"done": {
+		"message": "Виконано"
+	},
+	"alreadyadded": {
+		"message": "ПОМИЛКА. Такий запис уже доданий."
+	},
+	"add_new_exception": {
+		"message": "Додати сайт-виняток"
+	},
+	"add": {
+		"message": "Додати"
+	},
+	"exception_exclude": {
+		"message": "Видалити цей вебсайт зі списку винятків"
+	},
+	"exception_include": {
+		"message": "Додати цей вебсайт у список винятків"
+	}
+}

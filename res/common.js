@@ -7,6 +7,11 @@ function hideMsgbox() {
 	Array.from(document.getElementsByClassName('show')).forEach((el) => el.classList.remove('show', 'success', 'error'))
 }
 
+// Інтерфейс
+Array.from(document.querySelectorAll('[data-i18n]')).forEach((el) => {
+	el.innerText = chrome.i18n.getMessage(el.dataset.i18n)
+})
+
 
 // ————————————————————————————————————————————————————————————————————————————————
 // СТАТУС УВІМКНЕНОСТІ
@@ -15,126 +20,62 @@ function changeStatus() {
 	var status = document.getElementById('status-switch').checked
 	chrome.storage.local.set({status: status}, function() {
 		console.log('Статус активності виставлений')
+		// Оновлення іконки
+		chrome.runtime.sendMessage({action: 'updateIcon', value: status})
 	})
 }
 
 // ————————————————————————————————————————————————————————————————————————————————
-// ЗАБЛОКОВАНІ ВЕБСАЙТИ
+// ВЕБСАЙТИ-ВИНЯТКИ
 // ————————————————————————————————————————————————————————————————————————————————
-// Додати новий вебсайт у список блокування
-function addBlockedWebsite() {
+// Додати новий вебсайт
+function addException() {
 	clearTimeout(timeout_id)
-	var website = document.getElementById('newblockedwebsite').value
-	chrome.storage.sync.get('blockedwebsites', function(data) {
-		var blockedwebsites = data.blockedwebsites ? data.blockedwebsites : []
-		if (website && !blockedwebsites.includes(website)) {
-			try {
-				new RegExp(website, 'gi')
-
-				blockedwebsites.push(website)
-				// Запис у сховище
-				var jsonObj = {}
-				jsonObj.blockedwebsites = blockedwebsites
-				chrome.storage.sync.set(jsonObj, function() {
-					console.log('Новий елемент збережено.')
-				})
-				// Повідомлення користувачеві
-				document.getElementById('newblockedwebsite').value = ''
-				document.getElementById('form-newblockedwebsite').previousElementSibling.classList.add('show', 'success')
-				document.getElementById('form-newblockedwebsite').previousElementSibling.innerText = 'Виконано'
-				timeout_id = setTimeout(hideMsgbox, 2000)
-				// Оновити показаний список
-				showBlockedWebsites()
-			} catch (error) {
-				console.log(error)
-
-				document.getElementById('form-newblockedwebsite').previousElementSibling.classList.add('show', 'error')
-				document.getElementById('form-newblockedwebsite').previousElementSibling.innerText = 'ПОМИЛКА. Не можу створити регулярний вираз.'
-				timeout_id = setTimeout(hideMsgbox, 10000)
-			}
+	var website = document.getElementById('newexception').value
+	chrome.storage.sync.get('exceptions', function(data) {
+		var exceptions = data.exceptions ? data.exceptions : []
+		if (website && !exceptions.includes(website)) {
+			exceptions.push(website)
+			// Запис у сховище
+			var jsonObj = {}
+			jsonObj.blockedwebsites = blockedwebsites
+			chrome.storage.sync.set(jsonObj, function() {
+				console.log('Новий елемент збережено.')
+			})
+			// Повідомлення користувачеві
+			document.getElementById('newexception').value = ''
+			document.getElementById('form-newexception').previousElementSibling.classList.add('show', 'success')
+			document.getElementById('form-newexception').previousElementSibling.innerText = chrome.i18m.getMessage('done')
+			timeout_id = setTimeout(hideMsgbox, 2000)
+			// Оновити показаний список
+			showExceptions()
 		} else {
-			document.getElementById('form-newblockedwebsite').previousElementSibling.classList.add('show', 'error')
-			document.getElementById('form-newblockedwebsite').previousElementSibling.innerText = 'ПОМИЛКА. Такий запис уже доданий.'
+			document.getElementById('form-newexception').previousElementSibling.classList.add('show', 'error')
+			document.getElementById('form-newexception').previousElementSibling.innerText = chrome.i18m.getMessage('alreadyadded')
 			timeout_id = setTimeout(hideMsgbox, 10000)
 		}
 	})
 }
 
 // Перекрити у файлі options.js
-function showBlockedWebsites() {}
-
-// ————————————————————————————————————————————————————————————————————————————————
-// ПРАВИЛА ВИПРАВЛЕННЯ ПОСИЛАНЬ
-// ————————————————————————————————————————————————————————————————————————————————
-// Додати нове правило
-function addNewRule() {
-	clearTimeout(timeout_id)
-	var newruleB = document.getElementById('newruleB').value
-	var newruleA = document.getElementById('newruleA').value
-	chrome.storage.sync.get('linkrules', function(data) {
-		var linkrules = data.linkrules ? data.linkrules : []
-		if (newruleB && newruleA && newruleA !== newruleB) {
-			try {
-				new RegExp(newruleB, 'gi')
-				
-				linkrules.push([newruleB, newruleA])
-				// Запис у сховище
-				var jsonObj = {}
-				jsonObj.linkrules = linkrules
-				chrome.storage.sync.set(jsonObj, function() {
-					console.log('Новий елемент збережено.')
-				})
-				// Повідомлення користувачеві
-				document.getElementById('newruleB').value = ''
-				document.getElementById('newruleA').value = ''
-				document.getElementById('form-newrule').previousElementSibling.classList.add('show', 'success')
-				document.getElementById('form-newrule').previousElementSibling.innerText = 'Виконано'
-				timeout_id = setTimeout(hideMsgbox, 2000)
-				// Оновити показаний список
-				showLinkRules()
-			} catch (error) {
-				console.error(error)
-
-				document.getElementById('form-newrule').previousElementSibling.classList.add('show', 'error')
-				document.getElementById('form-newrule').previousElementSibling.innerText = 'ПОМИЛКА. Не можу створити регулярний вираз.'
-				timeout_id = setTimeout(hideMsgbox, 10000)
-			}
-		} else {
-			document.getElementById('form-newrule').previousElementSibling.classList.add('show', 'error')
-			document.getElementById('form-newrule').previousElementSibling.innerText = 'ПОМИЛКА. Значення мають бути різними.'
-			timeout_id = setTimeout(hideMsgbox, 10000)
-		}
-	})
-}
-
-// Перекрити у файлі options.js
-function showLinkRules() {}
+function showExceptions() {}
 
 // ————————————————————————————————————————————————————————————————————————————————
 // ————————————————————————————————————————————————————————————————————————————————
 // СТАРТОВІ ЗАВДАННЯ
 // Дія "Додати новий заблокований сайт"
-document.getElementById('form-newblockedwebsite').onsubmit = function(e) {
+document.getElementById('form-newexception').onsubmit = function(e) {
 	e.preventDefault()
-	addBlockedWebsite()
+	addException()
 }
 
-// Дія "Додати нове правило"
-document.getElementById('form-newrule').onsubmit = function(e) {
-	e.preventDefault()
-	addNewRule()
-}
 
 // Ховати старі сповіщення при введенні нових даних
-document.getElementById('newblockedwebsite').onchange = hideMsgbox
-document.getElementById('newruleB').onchange = hideMsgbox
-document.getElementById('newruleA').onchange = hideMsgbox
+document.getElementById('newexception').onchange = hideMsgbox
 
 // Статус увімкненості
 chrome.storage.local.get('status', function(data) {
 	document.getElementById('status-switch').checked = !!data.status
 })
 
-document.getElementById('status-switch').onchange = function() {
-	changeStatus()
-}
+document.getElementById('status-switch').onchange = changeStatus

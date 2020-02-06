@@ -18,7 +18,7 @@
 		</style>
 	</head>
 	<body>
-		<h1>Виправлення результатів пошуку</h1>
+		<h1 data-i18n="title"></h1>
 
 		<hr>
 		<label class="switch">
@@ -30,34 +30,31 @@
 			<button class="btn" id="page-refresh">Оновити</button>
 		</div>
 		<hr>
+
+		<!-- Дія з винятком -->
+		<div>
+			<a href="javascript:void(0)" onclick="" id="exception-exclude" data-i18n="exception_exclude" style="display: none;">exclude</a>
+			<a href="javascript:void(0)" id="exception-include" data-i18n="exception_include" style="display: none;">include</a>
+		</div>
 	
 		<!-- Додати новий сайт у список заблокованих -->
 		<div class="msgbox"></div>
-		<form method="post" id="form-newblockedwebsite">
-			<label for="newblockedwebsite" class="col-form-label">Додати сайт у список заблокованих</label>
-			<input type="text" id="newblockedwebsite" value="" placeholder="URL" class="form-control" required="">
-			<input type="submit" value="Додати" class="btn ">
-		</form>
-
-		<!-- Додати правило виправлення посилань -->
-		<div class="msgbox"></div>
-		<form method="post" id="form-newrule">
-			<label for="newruleB" class="col-form-label">Додати правило виправлення посилання</label>
-			<input type="text" id="newruleB" value="" placeholder="Є" class="form-control" required="">
-			<input type="text" id="newruleA" value="" placeholder="Має бути" class="form-control" required="">
-			<input type="submit" value="Додати" class="btn ">
+		<form method="post" id="form-newexception" style="display: none;">
+			<label for="newexception" class="col-form-label" data-i18n="add_new_exception"></label>
+			<input type="text" id="newexception" value="" placeholder="URL" class="form-control" required="">
+			<button class="btn" data-i18n="add"></button>
 		</form>
 
 		<p>
-			Список сайтів і правил — на <a href="/options.html" target="_blank">сторінці налаштувань</a>
+			Список сайтів — на <a href="/options.html" target="_blank">сторінці налаштувань</a>
 		</p>
 
 		<p>
-			<a href="https://github.com/oleksavyshnivsky/UASearchResultsCorrector" target="_blank">Github</a>
+			<a href="https://github.com/oleksavyshnivsky/unacceptablepostfilter" target="_blank">Github</a>
 		</p>
 
 		<p>
-			<a href="mailto:dying.escape+UASearchResultsCorrector@gmail.com" target="_blank">Написати автору</a>
+			<a href="mailto:dying.escape+unacceptablepostfilter@gmail.com" target="_blank">Написати автору</a>
 		</p>
 
 		<script src="common.js" charset="utf-8"></script>

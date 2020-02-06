@@ -83,6 +83,9 @@ showLinkRules()
 window.onfocus = function() {
 	showBlockedWebsites()
 	showLinkRules()
+	chrome.storage.local.get('status', function(data) {
+		document.getElementById('status-switch').checked = !!data.status
+	})
 }
 
 // Дії "Видалити"
