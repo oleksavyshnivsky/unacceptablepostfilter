@@ -1,133 +1,44 @@
 (function() {
 	'use strict';
-	// Користувацькі дані
-	// let blockedwebsites = []
-	// let linkrules = []
-	// chrome.storage.sync.get('blockedwebsites', function(data) {
-	// 	blockedwebsites = data.blockedwebsites
-	// })
-	// chrome.storage.sync.get('linkrules', function(data) {
-	// 	linkrules = data.linkrules
-	// })
+
+	const MINLENGTH = 20
+
 	var replacements = 0
 
 	// ————————————————————————————————————————————————————————————————————————————————
 	// ————————————————————————————————————————————————————————————————————————————————
 	// Language detector
-	// https://en.wikipedia.org/wiki/Wikipedia:Language_recognition_chart
-	// http://www.pravapis.org/art_letter_frequency.asp
-	// https://www.sttmedia.com/characterfrequency-russian
+	// https://developer.chrome.com/extensions/i18n
 	function isThisTextRu(text) {
-		var L = text.length
-		var a = (text.match(/а|А/g)||[]).length
-		var r = (text.match(/ы|Ы|э|Э|ъ|Ъ|ё|Ё/g)||[]).length
-		return (r/L > 0.01 && a/L < 0.1)
-
-		// return (
-		// 	text.includes('ы')
-		// 	|| text.includes('Ы')
-		// 	|| text.includes('э')
-		// 	|| text.includes('Э')
-		// 	|| text.includes('ъ')
-		// 	|| text.includes('Ъ')
-		// )
+		chrome.i18n.detectLanguage(text, function(result) {
+			if (result.isReliable && result.languages[0].language === 'ru' && result.languages[0].percentage > 40) {
+				return true
+			}
+		})
 	}
 
 	// ————————————————————————————————————————————————————————————————————————————————
 	// ВИПРАВЛЕННЯ КОНТЕНТУ
 	// ————————————————————————————————————————————————————————————————————————————————
 
-	// Виправлення посилань
-	function correctLinks() {
-		chrome.storage.sync.get('linkrules', function(data) {
-			var linkrules = data.linkrules ? data.linkrules : []
-			var regexes = []
-			linkrules.forEach((rule) => {regexes.push(new RegExp(rule[0], 'gi'))})
-			Array.from(document.getElementsByClassName('g')).forEach((el) => {
-				// el.innerHTML = el.innerHTML.replace(/\/ru\//gi, '/en/')
-				regexes.some((regex, i) => {
-					if (regex.test(el.innerHTML)) {
-						el.innerHTML = el.innerHTML.replace(regex, linkrules[i][1])
-						replacements++
-						return true
-					}
-				})
-			})
-		})
-	}
-
-	// ————————————————————————————————————————————————————————————————————————————————
-	// Усунення заголовків
-	function hideRuTitles() {
-		Array.from(document.getElementsByTagName('h3')).forEach((el) => {
-			if (isThisTextRu(el.innerText)) {
-				var html = el.innerHTML
-				el.setAttribute('data-blockedhtml', html)
-				el.innerHTML = el.closest('a').href
-
-				replacements++
-			}
-		})
-	}
-
-	// Усунення описів
-	function hideRuDescriptions() {
-		Array.from(document.getElementsByClassName('s')).forEach((el) => {
-			if (isThisTextRu(el.innerText)) {
-				var html = el.innerHTML
-				el.setAttribute('data-blockedhtml', html)
-				el.innerHTML = '<span class="ode-blocked">[Усунено]</span>'
-
-				replacements++
-			}
-		})
-	}
-
-	// ————————————————————————————————————————————————————————————————————————————————
-	// Усунення результатів із заблокованих сайтів
-
-	// Варіант 1. Чітка відповідність
-	function _hideBlockedWebsites() {
-		chrome.storage.sync.get('blockedwebsites', function(data) {
-			var blockedwebsites = data.blockedwebsites ? data.blockedwebsites : []
-			var blockedN = 0
-			Array.from(document.getElementsByClassName('g')).forEach((el) => {
-				var url = el.getElementsByTagName('a')[0].href
-				url = new URL(url)
-				if (blockedwebsites.includes(url.hostname)) {
-					blockedN++
-					var html = el.innerHTML
-					el.setAttribute('data-blockedhtml', html)
-					el.innerHTML = '<span class="ode-blocked">[Усунено результат з ' + url.hostname + ']</span>'
-					replacements++
-				}
-			})
-		})
-	}
-
-	// Варіант 2. Регулярні вирази
-	function hideBlockedWebsites() {
-		chrome.storage.sync.get('blockedwebsites', function(data) {
-			var blockedwebsites = data.blockedwebsites ? data.blockedwebsites : []
-			var regexes = []
-			blockedwebsites.forEach((el) => {regexes.push(new RegExp(el, 'gi'))})
-
-			var blockedN = 0
-			Array.from(document.getElementsByClassName('g')).forEach((el) => {
-				var url = el.getElementsByTagName('a')[0].href
-				url = new URL(url)
-
-				for (var i = 0; i < regexes.length; i++) {
-					if (regexes[i].test(url.hostname)) {
-						blockedN++
+	// Усунення неприйнятномовних блоків
+	function hide() {
+		Array.from(document.querySelectorAll('a, span:not(.blockingnotice), p, blockquote')).forEach((el) => {
+			if (el.innerText.length >= MINLENGTH) {
+				chrome.i18n.detectLanguage(el.innerText, function(result) {
+					if (
+						(result.isReliable && result.languages[0].language === 'ru' && result.languages[0].percentage > 40)
+						|| 
+						(!result.isReliable && result.languages.length && result.languages[0].language === 'ru' && result.languages[0].percentage > 90)
+					) {
 						var html = el.innerHTML
 						el.setAttribute('data-blockedhtml', html)
-						el.innerHTML = '<span class="ode-blocked">[Усунено результат з ' + url.hostname + ']</span>'
+						el.innerHTML = '<span class="blockingnotice">[Усунено]</span>'
+
 						replacements++
-						break
 					}
-				}
-			})
+				})
+			}
 		})
 	}
 
@@ -137,14 +48,8 @@
 	// ————————————————————————————————————————————————————————————————————————————————
 	chrome.storage.local.get('status', function(data) {
 		if (!!data.status) {
-			// Виправлення посилань
-			correctLinks()
-			// Усунення заголовків
-			// hideRuTitles()
-			// Усунення описів
-			hideRuDescriptions()
-			// Приховування результатів із заблокованих сайтів
-			hideBlockedWebsites()
+			// Усунення неприйнятномовних блоків
+			hide()
 		}
 	})
 
@@ -158,4 +63,5 @@
 		do if (predicate(el)) return el;
 		while (el = el && el.parentNode);
 	}
+
 })()

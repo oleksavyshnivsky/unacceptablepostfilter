@@ -3,11 +3,11 @@ body {
 	/*color: white;*/
 }
 
-.ode-blocked {
+.blockingnotice {
 	color: silver;
 }
 
-.ode-blocked:hover {
+.blockingnotice:hover {
 	color: black;
 	transition: color 1s;
 }

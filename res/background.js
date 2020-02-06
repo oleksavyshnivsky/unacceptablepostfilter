@@ -6,18 +6,7 @@ chrome.runtime.onInstalled.addListener(function() {
 		console.log('Статус активності виставлений')
 	})
 
-	chrome.storage.sync.set({exceptwebsites: ['www.google.com']}, function() {
+	chrome.storage.sync.set({exceptions: ['www.google.com']}, function() {
 		console.log('Список вебсайтів-винятків записаний.')
-	})
-
-	chrome.declarativeContent.onPageChanged.removeRules(undefined, function() {
-		chrome.declarativeContent.onPageChanged.addRules([{
-			conditions: [
-				new chrome.declarativeContent.PageStateMatcher({
-					pageUrl: {hostEquals: 'www.google.com'},
-				})
-			],
-			actions: [new chrome.declarativeContent.ShowPageAction()]
-		}])
 	})
 })
