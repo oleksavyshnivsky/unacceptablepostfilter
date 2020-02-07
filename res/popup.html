@@ -6,56 +6,74 @@
 
 		<style>
 			body {
-				width: 400px;
-				/*height: 430px;*/
+				width: 300px;
 				text-align: center;
-				padding: 0.5rem;
+				padding: 0.1rem;
+				background-color: rgb(32,33,36);
+				color: white;
+			}
+			h1 {
+				padding: 0;
+				margin: 0; 
 			}
 			#page-refresh-wrapper {
 				display: none;
-				padding: 1rem;
+			}
+			.row {
+				line-height: 1rem;
+				padding: 5px; 
+			}
+			/* Для коректного спрацювання потрібно, щоб .row був не менш ніж внуком body */
+			.row:not(:last-child) { 
+				border-bottom: 1px solid silver;
+			}
+
+			a {
+				color: white;
+				text-decoration: none;
+				display: block;
+				line-height: 1.5rem;
+				width: 100%;
+			}
+			a:hover {
+
+				background-color: wheat;
 			}
 		</style>
 	</head>
 	<body>
-		<h1 data-i18n="title"></h1>
-
-		<hr>
-		<label class="switch">
-			<input type="checkbox" id="status-switch" >
-			<span class="slider round"></span>
-		</label>
-
-		<div id="page-refresh-wrapper">
-			<button class="btn" id="page-refresh">Оновити</button>
-		</div>
-		<hr>
-
-		<!-- Дія з винятком -->
 		<div>
-			<a href="javascript:void(0)" onclick="" id="exception-exclude" data-i18n="exception_exclude" style="display: none;">exclude</a>
-			<a href="javascript:void(0)" id="exception-include" data-i18n="exception_include" style="display: none;">include</a>
+			<div class="row">
+				<h1 data-i18n="title"></h1>
+			</div>
+			<!-- Перемикач активності -->
+			<div class="row">
+				<label class="switch">
+					<input type="checkbox" id="status-switch" >
+					<span class="slider round"></span>
+				</label>
+			</div>
+			<div id="page-refresh-wrapper" class="row">
+				<button class="btn" id="page-refresh" data-i18n="page_reload"></button>
+			</div>
+			<!-- Дія з винятком -->
+			<div class="row">
+				<a href="javascript:void(0)" onclick="" id="exception-exclude" data-i18n="exception_exclude" style="display: none;"></a>
+				<a href="javascript:void(0)" id="exception-include" data-i18n="exception_include" style="display: none;"></a>
+			</div>
+			<!-- Налаштування -->
+			<div class="row">
+				<a href="/options.html" target="_blank" data-i18n="options"></a>
+			</div>
+			<!-- Налаштування -->
+			<div class="row">
+				<a href="https://github.com/oleksavyshnivsky/unacceptablepostfilter" target="_blank">Github</a>
+			</div>
+			<!-- Контакт -->
+			<div class="row">
+				<a href="mailto:dying.escape+unacceptablepostfilter@gmail.com" target="_blank" data-i18n="contact"></a>
+			</div>
 		</div>
-	
-		<!-- Додати новий сайт у список заблокованих -->
-		<div class="msgbox"></div>
-		<form method="post" id="form-newexception" style="display: none;">
-			<label for="newexception" class="col-form-label" data-i18n="add_new_exception"></label>
-			<input type="text" id="newexception" value="" placeholder="URL" class="form-control" required="">
-			<button class="btn" data-i18n="add"></button>
-		</form>
-
-		<p>
-			Список сайтів — на <a href="/options.html" target="_blank">сторінці налаштувань</a>
-		</p>
-
-		<p>
-			<a href="https://github.com/oleksavyshnivsky/unacceptablepostfilter" target="_blank">Github</a>
-		</p>
-
-		<p>
-			<a href="mailto:dying.escape+unacceptablepostfilter@gmail.com" target="_blank">Написати автору</a>
-		</p>
 
 		<script src="common.js" charset="utf-8"></script>
 		<script src="popup.js" charset="utf-8"></script>

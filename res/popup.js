@@ -1,5 +1,8 @@
 // popup.html також використовує common.js
 
+// ————————————————————————————————————————————————————————————————————————————————
+// ————————————————————————————————————————————————————————————————————————————————
+// Додати чинний вебсайт у список винятків
 function include() {
 	chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
 		var url = new URL(tabs[0].url)
@@ -22,6 +25,9 @@ function include() {
 	})	
 }
 
+// ————————————————————————————————————————————————————————————————————————————————
+// ————————————————————————————————————————————————————————————————————————————————
+// Видалити чинний вебсайт зі списку винятків
 function exclude() {
 	chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
 		var url = new URL(tabs[0].url)
@@ -44,6 +50,10 @@ function exclude() {
 	})	
 }
 
+
+// ————————————————————————————————————————————————————————————————————————————————
+// ————————————————————————————————————————————————————————————————————————————————
+// Яку з кнопок "Додати цей вебсайт у список винятків" і "Видалити його звідти" показувати
 chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
 	var url = new URL(tabs[0].url)
 
@@ -58,6 +68,8 @@ chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
 })
 
 
+// ————————————————————————————————————————————————————————————————————————————————
+// ————————————————————————————————————————————————————————————————————————————————
 // Зміна статусу активності
 document.getElementById('status-switch').addEventListener('change', () => {
 	document.getElementById('page-refresh-wrapper').style.display = 'block'
@@ -77,5 +89,7 @@ document.getElementById('page-refresh').addEventListener('click', () => {
 	// browser.tabs.reload(tab.id).then(window.close)
 })
 
+// Дії кнопок "Додати цей вебсайт у список винятків" і "Видалити його звідти"
 document.getElementById('exception-include').addEventListener('click', include)
 document.getElementById('exception-exclude').addEventListener('click', exclude)
+

@@ -35,5 +35,20 @@
 	},
 	"exception_include": {
 		"message": "Додати цей вебсайт у список винятків"
+	},
+	"page_reload": {
+		"message": "Перезавантажити сторінку"
+	},
+	"status_on": {
+		"message": "Увімкнути блокування"
+	},
+	"status_off": {
+		"message": "Вимкнути блокування"
+	},
+	"options": {
+		"message": "Налаштування"
+	},
+	"contact": {
+		"message": "Написати автору"
 	}
 }

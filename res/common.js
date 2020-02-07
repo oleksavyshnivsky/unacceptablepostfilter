@@ -20,8 +20,10 @@ function changeStatus() {
 	var status = document.getElementById('status-switch').checked
 	chrome.storage.local.set({status: status}, function() {
 		console.log('Статус активності виставлений')
-		// Оновлення іконки
-		chrome.runtime.sendMessage({action: 'updateIcon', value: status})
+		// Оновлення іконки TODO
+		// chrome.runtime.sendMessage({action: 'updateIcon', value: status})
+		// Зміна підпису
+		document.getElementById('status-switch').parentNode.title = chrome.i18m.getMessage(status?'status_off':'status_on')
 	})
 }
 
