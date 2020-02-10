@@ -12,41 +12,77 @@
 	"title": {
 		"message": "Мовний фільтр"
 	},
-	"blocked": {
-		"message": "Усунено"
-	},
-	"blockagain": {
-		"message": "Знову заблокувати"
-	},
-	"done": {
-		"message": "Виконано"
-	},
-	"alreadyadded": {
-		"message": "ПОМИЛКА. Такий запис уже доданий."
-	},
-	"add_new_exception": {
-		"message": "Додати сайт-виняток"
-	},
-	"add": {
-		"message": "Додати"
-	},
-	"exception_exclude": {
-		"message": "Видалити цей вебсайт зі списку винятків"
-	},
-	"exception_include": {
-		"message": "Додати цей вебсайт у список винятків"
-	},
-	"page_reload": {
-		"message": "Перезавантажити сторінку"
-	},
 	"status_on": {
 		"message": "Увімкнути блокування"
 	},
 	"status_off": {
 		"message": "Вимкнути блокування"
 	},
+	"block_everywhere_except": {
+		"message": "Блокувати всюди крім сайтів-винятків"
+	},
+	"block_nowhere_except": {
+		"message": "Блокувати тільки на цільових сайтах"
+	},
+	"exceptions": {
+		"message": "Винятки"
+	},
+	"targets": {
+		"message": "Цільові сайти"
+	},
+	"add": {
+		"message": "Додати"
+	},
+	"add_new_exception": {
+		"message": "Додати сайт-виняток"
+	},
+	"include_exception": {
+		"message": "Додати цей вебсайт у список винятків"
+	},
+	"exclude_exception": {
+		"message": "Видалити цей вебсайт зі списку винятків"
+	},
+	"add_new_target": {
+		"message": "Додати цільовий сайт"
+	},
+	"include_target": {
+		"message": "Додати цей вебсайт у цільовий список"
+	},
+	"exclude_target": {
+		"message": "Видалити цей вебсайт із цільового списку"
+	},
+	"delete_all": {
+		"message": "Видалити усі сайти зі списку"
+	},
+	"confirm": {
+		"message": "Дійсно виконати цю дію?"
+	},
+	"confirm_exception_removal": {
+		"message": "Ви дійсно хочете видалити цей виняток?"
+	},
+	"confirm_target_removal": {
+		"message": "Ви дійсно хочете видалити цей цільовий сайт?"
+	},
+	"already_added": {
+		"message": "ПОМИЛКА. Такий запис уже доданий."
+	},
+	"done": {
+		"message": "Виконано"
+	},
+	"blocked": {
+		"message": "Усунено"
+	},
+	"block_again": {
+		"message": "Знову заблокувати"
+	},
+	"reload_page": {
+		"message": "Перезавантажити сторінку"
+	},
 	"options": {
 		"message": "Налаштування"
+	},
+	"loading": {
+		"message": "Завантажується..."
 	},
 	"contact": {
 		"message": "Написати автору"

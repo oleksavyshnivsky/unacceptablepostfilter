@@ -3,11 +3,11 @@ body {
 	/*color: white;*/
 }
 
-.blockingnotice {
+.blockingnotice, .blockagain {
 	color: silver;
 }
 
-.blockingnotice:hover {
+.blockingnotice:hover, .blockagain:hover {
 	color: black;
 	transition: color 1s;
 }

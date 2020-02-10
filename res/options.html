@@ -70,56 +70,64 @@
 	</head>
 	<body>
 		<div class="container">
-			<h1>Виправлення результатів пошуку</h1>
+			<h1 data-i18n="title"></h1>
 
-			<div class="text-center">
-				<hr>
+			<div class="row text-center">
 				<label class="switch">
 					<input type="checkbox" id="status-switch" >
 					<span class="slider round"></span>
 				</label>
-				<hr>
 			</div>
 
-			<h2>Заблоковані сайти</h2>
-			<!-- Додати новий сайт у список заблокованих -->
-			<div class="msgbox"></div>
-			<form method="post" id="form-newblockedwebsite">
-				<label for="newblockedwebsite" class="col-form-label">Додати сайт у список заблокованих</label>
-				<div style="display: flex;">
-					<input type="text" id="newblockedwebsite" value="" placeholder="URL" class="form-control" required="">
-					<input type="submit" value="Додати" class="btn">
+			<div class="row text-center">
+				<div class="msgbox"></div>
+				<select id="mode">
+					<option value="0" data-i18n="block_everywhere_except"></option>
+					<option value="1" data-i18n="block_nowhere_except"></option>
+				</select>
+			</div>
+
+			<div class="row" data-exceptions style="display: none;">
+				<h2 data-i18n="exceptions"></h2>
+				<!-- Додати новий сайт у винятки -->
+				<div class="msgbox"></div>
+				<form method="post" id="form-newexception">
+					<label for="newexception" class="col-form-label" data-i18n="add_new_exception"></label>
+					<div style="display: flex;">
+						<input type="text" id="newexception" value="" placeholder="URL" class="form-control" required="">
+						<button role="submit" class="btn" data-i18n="add"></button>
+					</div>
+				</form>
+				<!-- Список -->
+				<div id="exceptions-wrapper" class="list-wrapper">
+					<span class="loading" data-i18n="loading"></span>
 				</div>
-			</form>
-
-			<div id="blockedwebsites-wrapper" class="list-wrapper">
-				<span class="loading">Завантажується</span>
 			</div>
 
-			<h2>Правила виправлення посилань</h2>
-			<!-- Додати новий сайт у список заблокованих -->
-			<div class="msgbox"></div>
-			<form method="post" id="form-newrule">
-				<label for="newruleB" class="col-form-label">Додати правило виправлення посилання</label>
-				<div style="display: flex;">
-					<input type="text" id="newruleB" value="" placeholder="Є" class="form-control" required="">
-					<input type="text" id="newruleA" value="" placeholder="Має бути" class="form-control" required="">
-					<input type="submit" value="Додати" class="btn">
+			<div class="row" data-targets style="display: none;">
+				<h2 data-i18n="targets"></h2>
+				<!-- Додати новий сайт у винятки -->
+				<div class="msgbox"></div>
+				<form method="post" id="form-newtarget">
+					<label for="newtarget" class="col-form-label" data-i18n="add_new_target"></label>
+					<div style="display: flex;">
+						<input type="text" id="newtarget" value="" placeholder="URL" class="form-control" required="">
+						<button role="submit" class="btn" data-i18n="add"></button>
+					</div>
+				</form>
+				<!-- Список -->
+				<div id="targets-wrapper" class="list-wrapper">
+					<span class="loading" data-i18n="loading"></span>
 				</div>
-			</form>
-
-			<div id="linkrules-wrapper" class="list-wrapper">
-				<span class="loading">Завантажується</span>
 			</div>
 
-			<div class="text-center" style="margin-top: 3rem;">
-				<p>
-					<a href="https://github.com/oleksavyshnivsky/UASearchResultsCorrector" target="_blank">Github</a>
-				</p>
-
-				<p>
-					<a href="mailto:dying.escape+UASearchResultsCorrector@gmail.com" target="_blank">Написати автору</a>
-				</p>
+			<!-- Джерело -->
+			<div class="row text-center">
+				<a href="https://github.com/oleksavyshnivsky/unacceptablepostfilter" target="_blank">Github</a>
+			</div>
+			<!-- Контакт -->
+			<div class="row text-center">
+				<a href="mailto:oleksa.vyshnivsky+langfilter@gmail.com" target="_blank" data-i18n="contact">Написати автору</a>
 			</div>
 		</div>
 

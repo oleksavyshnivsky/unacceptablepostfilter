@@ -23,61 +23,40 @@ function changeStatus() {
 		// Оновлення іконки TODO
 		// chrome.runtime.sendMessage({action: 'updateIcon', value: status})
 		// Зміна підпису
-		document.getElementById('status-switch').parentNode.title = chrome.i18m.getMessage(status?'status_off':'status_on')
+		document.getElementById('status-switch').parentNode.title = chrome.i18n.getMessage(status?'status_off':'status_on')
 	})
 }
 
 // ————————————————————————————————————————————————————————————————————————————————
-// ВЕБСАЙТИ-ВИНЯТКИ
+// РЕЖИМ ВИБОРУ САЙТІВ
 // ————————————————————————————————————————————————————————————————————————————————
-// Додати новий вебсайт
-function addException() {
-	clearTimeout(timeout_id)
-	var website = document.getElementById('newexception').value
-	chrome.storage.sync.get('exceptions', function(data) {
-		var exceptions = data.exceptions ? data.exceptions : []
-		if (website && !exceptions.includes(website)) {
-			exceptions.push(website)
-			// Запис у сховище
-			var jsonObj = {}
-			jsonObj.blockedwebsites = blockedwebsites
-			chrome.storage.sync.set(jsonObj, function() {
-				console.log('Новий елемент збережено.')
-			})
-			// Повідомлення користувачеві
-			document.getElementById('newexception').value = ''
-			document.getElementById('form-newexception').previousElementSibling.classList.add('show', 'success')
-			document.getElementById('form-newexception').previousElementSibling.innerText = chrome.i18m.getMessage('done')
-			timeout_id = setTimeout(hideMsgbox, 2000)
-			// Оновити показаний список
-			showExceptions()
-		} else {
-			document.getElementById('form-newexception').previousElementSibling.classList.add('show', 'error')
-			document.getElementById('form-newexception').previousElementSibling.innerText = chrome.i18m.getMessage('alreadyadded')
-			timeout_id = setTimeout(hideMsgbox, 10000)
-		}
+function changeMode() {
+	var mode = parseInt(document.getElementById('mode').value)
+	chrome.storage.sync.set({mode: mode}, function() {
+		console.log('Режим виставлений')
+		// Оновлення іконки TODO
+		// chrome.runtime.sendMessage({action: 'updateIcon', value: status})
+		// Блоки винятків і цілей
+		Array.from(document.querySelectorAll('[data-exceptions]')).forEach((el) => {el.style.display = !mode?'block':'none'})
+		Array.from(document.querySelectorAll('[data-targets]')).forEach((el) => {el.style.display = mode?'block':'none'})
 	})
 }
-
-// Перекрити у файлі options.js
-function showExceptions() {}
 
 // ————————————————————————————————————————————————————————————————————————————————
 // ————————————————————————————————————————————————————————————————————————————————
 // СТАРТОВІ ЗАВДАННЯ
-// Дія "Додати новий заблокований сайт"
-document.getElementById('form-newexception').onsubmit = function(e) {
-	e.preventDefault()
-	addException()
-}
-
-
-// Ховати старі сповіщення при введенні нових даних
-document.getElementById('newexception').onchange = hideMsgbox
-
 // Статус увімкненості
 chrome.storage.local.get('status', function(data) {
 	document.getElementById('status-switch').checked = !!data.status
+	document.getElementById('status-switch').parentNode.title = chrome.i18n.getMessage(!!data.status?'status_off':'status_on')
+	document.getElementById('status-switch').onchange = changeStatus
 })
 
-document.getElementById('status-switch').onchange = changeStatus
+// Режим сайтів
+chrome.storage.sync.get('mode', function(data) {
+	var mode = parseInt(data.mode)
+	document.getElementById('mode').value = mode
+	Array.from(document.querySelectorAll('[data-exceptions]')).forEach((el) => {el.style.display = !mode?'block':'none'})
+	Array.from(document.querySelectorAll('[data-targets]')).forEach((el) => {el.style.display = mode?'block':'none'})
+	document.getElementById('mode').onchange = changeMode
+})

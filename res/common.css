@@ -193,3 +193,13 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
+
+/* Рядки */
+.row {
+	line-height: 1rem;
+	padding: 5px; 
+}
+/* Для коректного спрацювання потрібно, щоб .row був не менш ніж внуком body */
+.row:not(:last-child) { 
+	border-bottom: 1px solid silver;
+}

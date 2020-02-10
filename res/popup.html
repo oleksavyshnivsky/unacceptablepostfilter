@@ -19,15 +19,7 @@
 			#page-refresh-wrapper {
 				display: none;
 			}
-			.row {
-				line-height: 1rem;
-				padding: 5px; 
-			}
-			/* Для коректного спрацювання потрібно, щоб .row був не менш ніж внуком body */
-			.row:not(:last-child) { 
-				border-bottom: 1px solid silver;
-			}
-
+			
 			a {
 				color: white;
 				text-decoration: none;
@@ -36,8 +28,7 @@
 				width: 100%;
 			}
 			a:hover {
-
-				background-color: wheat;
+				background-color: grey;
 			}
 		</style>
 	</head>
@@ -53,25 +44,37 @@
 					<span class="slider round"></span>
 				</label>
 			</div>
+			<div class="row">
+				<div class="msgbox"></div>
+				<select id="mode">
+					<option value="0" data-i18n="block_everywhere_except"></option>
+					<option value="1" data-i18n="block_nowhere_except"></option>
+				</select>
+			</div>
 			<div id="page-refresh-wrapper" class="row">
-				<button class="btn" id="page-refresh" data-i18n="page_reload"></button>
+				<button class="btn" id="page-refresh" data-i18n="reload_page"></button>
 			</div>
 			<!-- Дія з винятком -->
-			<div class="row">
-				<a href="javascript:void(0)" onclick="" id="exception-exclude" data-i18n="exception_exclude" style="display: none;"></a>
-				<a href="javascript:void(0)" id="exception-include" data-i18n="exception_include" style="display: none;"></a>
+			<div class="row" style="display: none;" data-exceptions>
+				<a href="javascript:void(0)" id="exception-exclude" data-i18n="exclude_exception" style="display: none;"></a>
+				<a href="javascript:void(0)" id="exception-include" data-i18n="include_exception" style="display: none;"></a>
+			</div>
+			<!-- Дія з цільовим сайтом -->
+			<div class="row" style="display: none;" data-targets>
+				<a href="javascript:void(0)" id="target-exclude" data-i18n="exclude_target" style="display: none;"></a>
+				<a href="javascript:void(0)" id="target-include" data-i18n="include_target" style="display: none;"></a>
 			</div>
 			<!-- Налаштування -->
 			<div class="row">
 				<a href="/options.html" target="_blank" data-i18n="options"></a>
 			</div>
-			<!-- Налаштування -->
+			<!-- Джерело -->
 			<div class="row">
 				<a href="https://github.com/oleksavyshnivsky/unacceptablepostfilter" target="_blank">Github</a>
 			</div>
 			<!-- Контакт -->
 			<div class="row">
-				<a href="mailto:dying.escape+unacceptablepostfilter@gmail.com" target="_blank" data-i18n="contact"></a>
+				<a href="mailto:oleksa.vyshnivsky+langfilter@gmail.com" target="_blank" data-i18n="contact">Написати автору</a>
 			</div>
 		</div>
 
