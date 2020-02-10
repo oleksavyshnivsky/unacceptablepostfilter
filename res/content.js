@@ -2,8 +2,8 @@
 	'use strict';
 
 	const MINLENGTH = 20		// Мінімальна довжина текстівки для перевірки
-	const MINPERCENTAGET = 90	// Мінімальний відсоток для блокування, якщо isReliable = true
-	const MINPERCENTAGEF = 40	// Мінімальний відсоток для блокування, якщо isReliable = false
+	const MINPERCENTAGET = 40	// Мінімальний відсоток для блокування, якщо isReliable = true
+	const MINPERCENTAGEF = 90	// Мінімальний відсоток для блокування, якщо isReliable = false
 
 	// Які елементи потрібно перевіряти 
 	//		без "a" — аби розуміти, куди ведуть посилання
@@ -27,9 +27,9 @@
 				// https://developer.chrome.com/extensions/i18n
 				chrome.i18n.detectLanguage(el.innerText, function(result) {
 					if (
-						(result.isReliable && result.languages[0].language === 'ru' && result.languages[0].percentage >= MINPERCENTAGEF)
+						(result.isReliable && result.languages[0].language === 'ru' && result.languages[0].percentage >= MINPERCENTAGET)
 						|| 
-						(!result.isReliable && result.languages.length && result.languages[0].language === 'ru' && result.languages[0].percentage >= MINPERCENTAGET)
+						(!result.isReliable && result.languages.length && result.languages[0].language === 'ru' && result.languages[0].percentage >= MINPERCENTAGEF)
 					) {
 						var html = el.innerHTML
 						el.setAttribute('data-blockedhtml', html)
@@ -62,25 +62,47 @@
 	// ————————————————————————————————————————————————————————————————————————————————
 	// ПОЧАТКОВА ПОСЛІДОВНІСТЬ ДІЙ
 	// ————————————————————————————————————————————————————————————————————————————————
-	// Якщо (Статус = Увімкнено) і (Цей вебсайт відсутній у списку винятків)
+	// Якщо (Статус = Увімкнено) і (Залежно від mode: Цей вебсайт відсутній у списку винятків або присутній у списку цільових сайтів)
 	chrome.storage.local.get('status', function(data) {
-		if (!!data.status) { 
-			chrome.storage.sync.get('exceptions', function(data) {
-				if (!data.exceptions.includes(location.hostname)) {
-					// Усунення неприйнятномовних блоків
-					blockAll()
+		if (!!data.status) {
+			chrome.storage.sync.get('mode', function(data) {
+				var mode = parseInt(data.mode)
+				if (mode) { // цільові сайти
+					chrome.storage.sync.get('targets', function(data) {
+						if (data.targets.includes(location.hostname)) {
+							// Усунення неприйнятномовних блоків
+							blockAll()
 
-					// Розблокування окремих блоків
-					document.ondblclick = function(e) {
-						if (e.target.classList.contains('blockingnotice')) unblock(e.target.parentElement)
-					}
+							// Розблокування окремих блоків
+							document.ondblclick = function(e) {
+								if (e.target.classList.contains('blockingnotice')) unblock(e.target.parentElement)
+							}
 
-					// Повторне блокування окремих блоків
-					document.onclick = function(e) {
-						if (e.target.classList.contains('blockagain')) block(e.target.parentElement)
-					}
+							// Повторне блокування окремих блоків
+							document.onclick = function(e) {
+								if (e.target.classList.contains('blockagain')) block(e.target.parentElement)
+							}
+						}
+					})
+				} else {	// усі крім винятків
+					chrome.storage.sync.get('exceptions', function(data) {
+						if (!data.exceptions.includes(location.hostname)) {
+							// Усунення неприйнятномовних блоків
+							blockAll()
+
+							// Розблокування окремих блоків
+							document.ondblclick = function(e) {
+								if (e.target.classList.contains('blockingnotice')) unblock(e.target.parentElement)
+							}
+
+							// Повторне блокування окремих блоків
+							document.onclick = function(e) {
+								if (e.target.classList.contains('blockagain')) block(e.target.parentElement)
+							}
+						}
+					})
 				}
-			})
+			})	
 		}
 	})	
 
