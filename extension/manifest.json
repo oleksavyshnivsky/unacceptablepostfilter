@@ -1,12 +1,12 @@
 {
 	"manifest_version": 2,
-	"name": "Unacceptable Posts Filter UA",
+	"name": "LangFilter",
 	"description": "Прибирання неприйнятномовних текстівок",
 	"version": "0.1",
 	"permissions": ["activeTab", "declarativeContent", "storage"],
 	"browser_action": {
 		"default_popup": "popup.html",
-		"default_icon": "assets/icon16.png"
+		"default_icon": "assets/filtered16.png"
     },
     "options_page": "options.html",
 	"background": {
@@ -24,9 +24,9 @@
 		}
 	],
 	"icons": {
-		"16": "assets/icon16.png",
-		"48": "assets/icon48.png",
-		"128": "assets/icon128.png"
+		"16": "assets/filtered16.png",
+		"48": "assets/filtered48.png",
+		"128": "assets/filtered128.png"
 	},
 	"default_locale": "uk"
 }

@@ -45,7 +45,7 @@
 	// Показ заблокованої текстівки
 	function unblock(el) {
 		el.innerHTML = '<a href="javascript:void(0)" class="blockagain">['
-			+ chrome.i18n.getMessage('blockagain') + ']</a> '
+			+ chrome.i18n.getMessage('block_again') + ']</a> '
 			+ el.dataset.blockedhtml
 
 		replacements--
@@ -82,6 +82,12 @@
 							document.onclick = function(e) {
 								if (e.target.classList.contains('blockagain')) block(e.target.parentElement)
 							}
+
+							// Активність іконки
+							chrome.runtime.sendMessage({action: 'updateIcon', value: true})
+						} else {
+							// Активність іконки
+							chrome.runtime.sendMessage({action: 'updateIcon', value: false})
 						}
 					})
 				} else {	// усі крім винятків
@@ -99,6 +105,12 @@
 							document.onclick = function(e) {
 								if (e.target.classList.contains('blockagain')) block(e.target.parentElement)
 							}
+
+							// Активність іконки
+							chrome.runtime.sendMessage({action: 'updateIcon', value: true})
+						} else {
+							// Активність іконки
+							chrome.runtime.sendMessage({action: 'updateIcon', value: false})
 						}
 					})
 				}

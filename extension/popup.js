@@ -131,10 +131,16 @@ chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
 
 // ————————————————————————————————————————————————————————————————————————————————
 // ————————————————————————————————————————————————————————————————————————————————
-// Зміна статусу активності
-document.getElementById('status-switch').addEventListener('change', () => {
+// Зміни налаштувань, після яких потрібне перезавантаження сторінки
+function showPageRefreshWrapper() {
 	document.getElementById('page-refresh-wrapper').style.display = 'block'
-})
+}
+document.getElementById('status-switch').addEventListener('change', showPageRefreshWrapper)
+document.getElementById('mode').addEventListener('change', showPageRefreshWrapper)
+document.getElementById('exception-exclude').addEventListener('click', showPageRefreshWrapper)
+document.getElementById('exception-include').addEventListener('click', showPageRefreshWrapper)
+document.getElementById('target-exclude').addEventListener('click', showPageRefreshWrapper)
+document.getElementById('target-include').addEventListener('click', showPageRefreshWrapper)
 
 // Перезавантаження сторінки
 document.getElementById('page-refresh').addEventListener('click', () => {
