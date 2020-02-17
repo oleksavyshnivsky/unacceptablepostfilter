@@ -74,7 +74,7 @@
 							blockAll()
 
 							// Розблокування окремих блоків
-							document.ondblclick = function(e) {
+							document.onclick = function(e) {
 								if (e.target.classList.contains('blockingnotice')) unblock(e.target.parentElement)
 							}
 
@@ -97,7 +97,7 @@
 							blockAll()
 
 							// Розблокування окремих блоків
-							document.ondblclick = function(e) {
+							document.onclick = function(e) {
 								if (e.target.classList.contains('blockingnotice')) unblock(e.target.parentElement)
 							}
 

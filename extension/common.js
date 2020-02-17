@@ -2,12 +2,15 @@
 	Спільні дії для popup.js і options.js
 */
 
+// Ідентифікатор планового закриття сповіщення
 var timeout_id
+
+// Закриття сповіщення
 function hideMsgbox() {
 	Array.from(document.getElementsByClassName('show')).forEach((el) => el.classList.remove('show', 'success', 'error'))
 }
 
-// Інтерфейс
+// Мова інтерфейсу — виставлення текстівок при завантаженні popup/options
 Array.from(document.querySelectorAll('[data-i18n]')).forEach((el) => {
 	el.innerText = chrome.i18n.getMessage(el.dataset.i18n)
 })

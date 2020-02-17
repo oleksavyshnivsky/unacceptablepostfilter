@@ -10,4 +10,5 @@ body {
 .blockingnotice:hover, .blockagain:hover {
 	color: black;
 	transition: color 1s;
+	cursor: pointer;
 }
