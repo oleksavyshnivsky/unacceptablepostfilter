@@ -74,12 +74,14 @@
 							blockAll()
 
 							// Розблокування окремих блоків
+							// document.ondblclick = function(e) {
+							// 	if (e.target.classList.contains('blockingnotice')) unblock(e.target.parentElement)
+							// }
+							
 							document.onclick = function(e) {
+								// Розблокування окремих блоків
 								if (e.target.classList.contains('blockingnotice')) unblock(e.target.parentElement)
-							}
-
-							// Повторне блокування окремих блоків
-							document.onclick = function(e) {
+								// Повторне блокування окремих блоків
 								if (e.target.classList.contains('blockagain')) block(e.target.parentElement)
 							}
 
@@ -97,12 +99,15 @@
 							blockAll()
 
 							// Розблокування окремих блоків
-							document.onclick = function(e) {
-								if (e.target.classList.contains('blockingnotice')) unblock(e.target.parentElement)
-							}
+							// document.ondblclick = function(e) {
+							// 	if (e.target.classList.contains('blockingnotice')) unblock(e.target.parentElement)
+							// }
 
-							// Повторне блокування окремих блоків
+							
 							document.onclick = function(e) {
+								// Розблокування окремих блоків
+								if (e.target.classList.contains('blockingnotice')) unblock(e.target.parentElement)
+								// Повторне блокування окремих блоків
 								if (e.target.classList.contains('blockagain')) block(e.target.parentElement)
 							}
 
@@ -115,6 +120,8 @@
 					})
 				}
 			})	
+		} else {
+			chrome.runtime.sendMessage({action: 'updateIcon', value: false})
 		}
 	})	
 

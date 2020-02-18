@@ -25,10 +25,10 @@ chrome.runtime.onInstalled.addListener(function() {
 // Зміна іконки (поки не використовується. TODO: Зробити іконки для варіантів "заміну увімкнено" і "заміну вимкнено")
 chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
 	if (msg.action === 'updateIcon') {
-		if (msg.value) { 	// Заміну вимкнено
-			chrome.browserAction.setIcon({path: '/assets/mixed16.png', tabId: sender.tab.id})
-		} else {			// Заміну увімкнено
+		if (msg.value) { 	// Заміну увімкнено
 			chrome.browserAction.setIcon({path: '/assets/filtered16.png', tabId: sender.tab.id})
+		} else {			// Заміну вимкнено
+			chrome.browserAction.setIcon({path: '/assets/mixed16.png', tabId: sender.tab.id})
 		}
 	}
 })
