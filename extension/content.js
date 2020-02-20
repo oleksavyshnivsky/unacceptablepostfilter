@@ -23,7 +23,7 @@
 	// Усунення неприйнятномовних блоків
 	function blockAll() {
 		Array.from(document.querySelectorAll(SELECTORS)).forEach((el) => {
-			if (el.innerText.length >= MINLENGTH) {
+			if (el.innerText.length >= MINLENGTH && !el.innerHTML.includes('<a')) {
 				// https://developer.chrome.com/extensions/i18n
 				chrome.i18n.detectLanguage(el.innerText, function(result) {
 					if (
