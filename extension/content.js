@@ -33,6 +33,7 @@
 					) {
 						var html = el.innerHTML
 						el.setAttribute('data-blockedhtml', html)
+						el.setAttribute('data-langs', JSON.stringify(result))
 						el.innerHTML = BLOCKINGNOTICE
 
 						replacements++
