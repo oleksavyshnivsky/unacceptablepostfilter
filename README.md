@@ -37,20 +37,20 @@
 
 ## Склад проєкту
 
-* <code>extensions</code> — директорія розпакованого розширення
+* <code>extension</code> — директорія розпакованого розширення
 * <code>misc</code> — допоміжні файли на період розробки
 
-### Code injection:
+### Зміна вмісту сторінки
 
 - styles.css
 - content.js
 
-### Popup
+### Popup-вікно
 
 - popup.html
 - common.css
 - common.js
-- Popup.js
+- popup.js
 
 ### Сторінка налаштувань
 
