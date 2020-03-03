@@ -87,7 +87,16 @@
 	"contact": {
 		"message": "Написати автору"
 	},
-	"wrongdetections": {
-		"message": "Помилки визначення мови"
+	"wrongdetection": {
+		"message": "Помилка визначення мови"
+	},
+	"wrongphrase": {
+		"message": "Проблемна текстівка"
+	},
+	"wrongphraselist": {
+		"message": "Список проблемних текстівок"
+	},
+	"phrase_submitted": {
+		"message": "Текстівку надіслано"
 	}
 }

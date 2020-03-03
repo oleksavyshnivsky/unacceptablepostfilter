@@ -162,3 +162,6 @@ document.getElementById('exception-exclude').addEventListener('click', excludeEx
 document.getElementById('target-include').addEventListener('click', includeTarget)
 document.getElementById('target-exclude').addEventListener('click', excludeTarget)
 
+// Підпис текстівки з неправильно визначеною мовою
+document.getElementById('newphrase').placeholder = chrome.i18n.getMessage('wrongphrase')
+document.getElementById('wrongphraselist').href = wrongphraselisturl

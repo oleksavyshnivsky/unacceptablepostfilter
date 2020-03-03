@@ -78,7 +78,20 @@
 			</div>
 			<!-- Помилки -->
 			<div class="row">
-				<a href="https://docs.google.com/document/d/1pz61kof2SVlXmv1loH2CZmSTOhBzdl0297TbIS7_ru4/edit?usp=sharing" target="_blank" data-i18n="wrongdetections"></a>
+				<details>
+					<summary data-i18n="wrongdetection"></summary>
+					<div class="msgbox"></div>
+					<form method="post" id="form-add">
+						<!-- <label for="newphrase" class="col-form-label" data-i18n="wrongdetection"></label> -->
+						<div>
+							<input type="text" id="newphrase" name="phrase" value="" placeholder="" class="form-control" required="">
+							<button role="submit" class="btn" data-i18n="add" id="submit-add"></button>
+						</div>
+					</form>
+					<div class="row">
+						<a id="wrongphraselist" href="" target="_blank" data-i18n="wrongphraselist"></a>
+					</div>
+				</details>
 			</div>
 			
 		</div>
