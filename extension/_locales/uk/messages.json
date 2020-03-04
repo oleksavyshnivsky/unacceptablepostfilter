@@ -88,13 +88,16 @@
 		"message": "Написати автору"
 	},
 	"wrongdetection": {
-		"message": "Помилка визначення мови"
+		"message": "Повідомити про неправильно визначену мову"
 	},
 	"wrongphrase": {
 		"message": "Проблемна текстівка"
 	},
 	"wrongphraselist": {
 		"message": "Список проблемних текстівок"
+	},
+	"send": {
+		"message": "Надіслати"
 	},
 	"phrase_submitted": {
 		"message": "Текстівку надіслано"

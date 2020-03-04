@@ -1,0 +1,105 @@
+{
+	"name": {
+		"message": "Message text, with optional placeholders.",
+		"description": "Translator-aimed description of the message.",
+		"placeholders": {
+			"placeholder_name": {
+				"content": "A string to be placed within the message.",
+				"example": "Translator-aimed example of the placeholder string."
+			}
+		}
+	},
+	"title": {
+		"message": "Language filter"
+	},
+	"status_on": {
+		"message": "Enable blocking"
+	},
+	"status_off": {
+		"message": "Disable blocking"
+	},
+	"block_everywhere_except": {
+		"message": "Block everywhere"
+	},
+	"block_nowhere_except": {
+		"message": "Block only on the target websites"
+	},
+	"exceptions": {
+		"message": "Exceptions"
+	},
+	"targets": {
+		"message": "Target websites"
+	},
+	"add": {
+		"message": "Add"
+	},
+	"add_new_exception": {
+		"message": "Add exception"
+	},
+	"include_exception": {
+		"message": "Add this website into the expcetions list"
+	},
+	"exclude_exception": {
+		"message": "Remove this website from the expcetions list"
+	},
+	"add_new_target": {
+		"message": "Add target website"
+	},
+	"include_target": {
+		"message": "Add this website into the targets list"
+	},
+	"exclude_target": {
+		"message": "Remove this website from the targets list"
+	},
+	"delete_all": {
+		"message": "Remove all websites from this list"
+	},
+	"confirm": {
+		"message": "Are you sure?"
+	},
+	"confirm_exception_removal": {
+		"message": "Are you sure you want to delete this exception?"
+	},
+	"confirm_target_removal": {
+		"message": "Are you sure you want to delete this target website?"
+	},
+	"already_added": {
+		"message": "ERROR. Such record already exists."
+	},
+	"done": {
+		"message": "Done"
+	},
+	"blocked": {
+		"message": "Blocked"
+	},
+	"block_again": {
+		"message": "Block again"
+	},
+	"reload_page": {
+		"message": "Reload page"
+	},
+	"options": {
+		"message": "Options"
+	},
+	"loading": {
+		"message": "Loading..."
+	},
+	"contact": {
+		"message": "Send email to the author"
+	},
+	"wrongdetection": {
+		"message": "Report wrong language detection"
+	},
+	"wrongphrase": {
+		"message": "Wrongly detected text"
+	},
+	"wrongphraselist": {
+		"message": "All reported texts"
+	},
+	"send": {
+		"message": "Send"
+	},
+	"phrase_submitted": {
+		"message": "Text has been sent"
+	}
+}
