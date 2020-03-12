@@ -145,8 +145,8 @@ window.onfocus = function() {
 	chrome.storage.local.get('status', function(data) {
 		document.getElementById('status-switch').checked = !!data.status
 	})
-	chrome.storage.sync.get('mode', function(data) {
-		document.getElementById('mode').value = data.mode
+	chrome.storage.local.get('mode', function(data) {
+		document.getElementById('mode').value = data.mode ? data.mode : 0
 	})
 }
 

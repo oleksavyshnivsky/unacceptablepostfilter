@@ -40,7 +40,7 @@ function changeStatus() {
 // ————————————————————————————————————————————————————————————————————————————————
 function changeMode() {
 	var mode = parseInt(document.getElementById('mode').value)
-	chrome.storage.sync.set({mode: mode}, function() {
+	chrome.storage.local.set({mode: mode}, function() {
 		console.log('Режим виставлений')
 		// Оновлення іконки TODO
 		// chrome.runtime.sendMessage({action: 'updateIcon', value: status})
@@ -61,7 +61,7 @@ chrome.storage.local.get('status', function(data) {
 })
 
 // Режим сайтів
-chrome.storage.sync.get('mode', function(data) {
+chrome.storage.local.get('mode', function(data) {
 	var mode = parseInt(data.mode)
 	document.getElementById('mode').value = mode
 	Array.from(document.querySelectorAll('[data-exceptions]')).forEach((el) => {el.style.display = !mode?'block':'none'})

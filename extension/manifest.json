@@ -1,7 +1,8 @@
 {
 	"manifest_version": 2,
-	"name": "LangFilter",
-	"description": "Прибирання неприйнятномовних текстівок",
+	"name": "Language Filter",
+	"short_name": "LangFilter",
+	"description": "Designed to lower the amount of moscovian texts on Ukrainian websites",
 	"version": "0.1",
 	"permissions": ["activeTab", "declarativeContent", "storage"],
 	"browser_action": {
@@ -28,5 +29,5 @@
 		"48": "assets/filtered48.png",
 		"128": "assets/filtered128.png"
 	},
-	"default_locale": "uk"
+	"default_locale": "en"
 }
